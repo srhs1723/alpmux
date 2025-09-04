@@ -29,13 +29,11 @@ This version of Alpmux includes a build script to create a modified Alpine ISO w
     *   Create two virtual disks: `alpine.qcow2` for the OS and `userdata.qcow2` for your data.
 
 3.  **Install Alpine Linux**:
-    Run the installation script for Alpine:
+    Run the installation script for Alpine. This will boot from the **modified** `alpmux-alpine.iso` that you created in the previous step.
     ```bash
     bash start-alpine-install.sh
     ```
-    This will boot up the Alpine installer from your custom ISO.
-
-    *   Log in as `root` (no password). You should see the Alpmux banner.
+    *   Log in as `root` (no password). You should see the custom Alpmux banner as confirmation that you are using the modified ISO.
     *   Run `setup-alpine` and follow the on-screen instructions.
     *   When asked to choose a disk, select `vda` to install Alpine on. Use the `sys` mode.
 
