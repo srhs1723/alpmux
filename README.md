@@ -14,10 +14,9 @@ This version of Alpmux includes a build script to create a modified Alpine ISO w
 ## Installation
 
 1.  **Clone the Repository**:
-    First, you need to have a copy of this repository on your local machine. If you have forked this repository, replace the URL with your fork's URL.
     ```bash
-    git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-    cd YOUR_REPOSITORY
+    git clone https://github.com/srhs1723/alpmux.git
+    cd alpmux
     ```
 
 2.  **Run the Installation Script**:
