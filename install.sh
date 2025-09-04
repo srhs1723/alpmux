@@ -1,32 +1,27 @@
 #!/bin/bash
 
-# Alpmux - Termux with emulated Alpine environment
-# Installation script
+# Alpmux - Installation script
 
 echo "Starting Alpmux installation..."
 
-# Update Termux packages
-echo "Updating Termux packages..."
-pkg update -y
-pkg upgrade -y
+# --- Dependencies ---
+echo "Installing dependencies..."
+pkg update -y && pkg upgrade -y
+pkg install qemu-system-x86-64-headless qemu-utils wget xorriso cpio gzip -y
 
-# Install dependencies
-echo "Installing dependencies (QEMU)..."
-pkg install qemu-system-x86-64-headless qemu-utils -y
+# --- Build Modified ISO ---
+echo "Building modified Alpine ISO..."
+chmod +x build-iso.sh
+./build-iso.sh
 
-# Create directory for Alpine
-echo "Creating Alpine directory..."
-mkdir -p $HOME/alpine-linux
-cd $HOME/alpine-linux
-
-# Download Alpine ISO
-echo "Downloading Alpine Linux ISO..."
-# Using a recent version, but you can change this URL to a different version if needed
-wget https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/x86_64/alpine-virt-3.16.2-x86_64.iso
-
-# Create disk image
-echo "Creating disk image..."
+# --- Create Virtual Disks ---
+echo "Creating virtual disks..."
+# Main disk for Alpine Linux
 qemu-img create -f qcow2 alpine.qcow2 15G
+# User data disk
+qemu-img create -f qcow2 userdata.qcow2 5G
 
-echo "Installation complete!"
-echo "Next, run start-alpine.sh to begin the Alpine Linux setup."
+echo "Installation of Alpmux components complete."
+echo "Next, run start-alpine-install.sh to begin the Alpine Linux installation."
+echo "During the installation, you will need to format the user data disk."
+echo "Please refer to the README.md for instructions."

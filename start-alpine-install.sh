@@ -4,20 +4,16 @@
 
 echo "Starting Alpine Linux for installation..."
 
-# Change to the Alpine directory
-cd $HOME/alpine-linux
+ISO_FILE="alpmux-alpine.iso"
 
-# Get the ISO file name
-ISO_FILE=$(ls *.iso)
-
-if [ -z "$ISO_FILE" ]; then
-    echo "Error: Alpine ISO file not found. Please run install.sh first."
+if [ ! -f "$ISO_FILE" ]; then
+    echo "Error: Modified Alpine ISO not found. Please run install.sh first."
     exit 1
 fi
 
-# Start QEMU for installation
 qemu-system-x86_64 -smp 2 -m 2048 \
-  -drive file=alpine.qcow2,if=virtio \
+  -drive file=alpine.qcow2,if=virtio,index=0 \
+  -drive file=userdata.qcow2,if=virtio,index=1 \
   -netdev user,id=n1,hostfwd=tcp::2222-:22 \
   -device virtio-net,netdev=n1 \
   -cdrom "$ISO_FILE" -boot d \
