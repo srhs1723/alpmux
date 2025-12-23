@@ -1,11 +1,18 @@
 #!/bin/bash
+
+set -euo pipefail
+
 BASHRC_FILE="$HOME/.bashrc"
 AUTOSTART_LINE="sh $PWD/start-alpine.sh"
-if grep -q "$AUTOSTART_LINE" "$BASHRC_FILE"; then
+
+touch "$BASHRC_FILE"
+if grep -Fq "$AUTOSTART_LINE" "$BASHRC_FILE"; then
     echo "Autostart is already enabled."
 else
-    echo "" >> "$BASHRC_FILE"
-    echo "# Alpmux autostart" >> "$BASHRC_FILE"
-    echo "$AUTOSTART_LINE" >> "$BASHRC_FILE"
+    {
+        echo ""
+        echo "# Alpmux autostart"
+        echo "$AUTOSTART_LINE"
+    } >> "$BASHRC_FILE"
     echo "Autostart enabled."
 fi

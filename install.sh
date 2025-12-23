@@ -2,6 +2,8 @@
 
 # Alpmux - Installation script
 
+set -euo pipefail
+
 echo "Starting Alpmux installation..."
 
 # --- Dependencies ---
