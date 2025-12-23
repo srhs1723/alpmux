@@ -2,6 +2,13 @@
 
 # Alpmux - Start the Alpine environment
 
+set -euo pipefail
+
+if [ ! -f "alpine.qcow2" ] || [ ! -f "userdata.qcow2" ]; then
+  echo "Error: Virtual disks not found. Please run install.sh first." >&2
+  exit 1
+fi
+
 echo "Starting Alpine Linux..."
 
 qemu-system-x86_64 -smp 2 -m 2048 \
