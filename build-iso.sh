@@ -91,9 +91,7 @@ repack_iso() {
         -o "../../${MODIFIED_ISO}" \
         $boot_info \
         -graft-points \
-        /boot=./boot \
-        /apks=./apks \
-        /.alpine-release=./.alpine-release
+        /=./
 
     cd ../.. # back to root
 }
